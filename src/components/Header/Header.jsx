@@ -1,6 +1,6 @@
 import './Header.css';
 import { useState } from 'react';
-import logo from '../../../assets/logos.png';
+import logo from '../../assets/logos.png';
 export default function Header({ setShowModal, city}) {
     const currentDate = new Date().toLocaleString('default', {
         month: 'long',

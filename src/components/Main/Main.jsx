@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import './Main.css'
 import { useState } from 'react'
-import { defaultClothingItems } from '../../../utils/defaultClothingItems';
+import { defaultClothingItems } from '../../utils/defaultClothingItems';
 import ItemCard from '../ItemCard/ItemCard';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
+import WeatherCard from '../WeatherCard/WeatherCard';
 
 export default function Main({ showModal, setShowModal, temperature, weatherType, weatherInfo}) {
     console.log(weatherInfo)
@@ -57,20 +58,12 @@ export default function Main({ showModal, setShowModal, temperature, weatherType
     return (
         <>
             <main className="main">
-                <div aria-label="Temperature display" className="main__temperature-box">
-                    <span className="main__temperature-text">{temperature}°F</span>
-                    <img
-                        alt="Illustration of a white cloud with a small yellow sun peeking from behind on the right side"
-                        className="main__weather-img"
-                        draggable="false"
-                        src={`https://openweathermap.org/img/wn/${weatherInfo?.icon ?? ''}.png`}
-                        width="80"
-                        height="56"
-                    />
-                </div>
-                <p className="main__description">
-                    Today is {temperature}° F / You may want to wear: {weatherType}
-                </p>
+                <WeatherCard
+                    temperature={temperature}
+                    weatherType={weatherType}
+                    weatherInfo={weatherInfo}
+                />
+        
                 <section className="item-list">
                     {items
                         .filter(item => item.weather === weatherType)

@@ -1,0 +1,29 @@
+.main {
+    padding: 0.5rem 1.5rem 1.5rem;
+    flex-grow: 1;
+    background-color: #F3F3F3;
+}
+
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+
+
+
+
+.main__clothing-section {
+    margin-top: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    user-select: none;
+}
+
+@media (min-width: 640px) {
+    .main__clothing-section {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

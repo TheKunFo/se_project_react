@@ -1,7 +1,7 @@
-import Header from './Header/Header';
+import Header from '../Header/Header';
 import './App.css';
-import Main from './Main/main';
-import Footer from './Footer/Footer';
+import Main from '../Main/main';
+import Footer from '../Footer/Footer';
 import { useEffect, useState } from 'react';
 import { getWeather } from '../../utils/weatherApi';
 
