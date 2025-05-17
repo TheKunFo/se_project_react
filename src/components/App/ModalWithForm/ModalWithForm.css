@@ -1,0 +1,130 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 320px;
+    position: relative;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: black;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 11px;
+}
+
+.modal .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: gray;
+    cursor: pointer;
+}
+
+.modal .close-btn:hover {
+    color: #555;
+}
+
+input[type="text"],
+input[type="url"] {
+    width: 97%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+    margin-top: 10px;
+    font-size: 12px;
+    background-color: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="text"],
+input[type="url"]:focus {
+    border-bottom: 1px solid #007bff;
+
+}
+
+input[type="text"],
+input[type="url"]:focus {
+    border-bottom: 1px solid #ccc;
+}
+
+.modal fieldset {
+    border: none;
+    margin: 0 0 1rem 0;
+    padding: 0;
+}
+
+
+
+.modal legend {
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.modal .radio-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.modal .radio-group label {
+    font-size: 9px;
+}
+
+
+.modal-form__button {
+    background-color: #000;
+    color: white;
+    font-size: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.modal-form__button:hover {
+    background-color: #737373;
+}
+
+.modal-form_button_disabled {
+    background-color: #ccc;
+    color: white;
+    font-size: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 2px;
+
+}
+
+.input-error {
+    border-bottom: 1px solid #FF4D00 !important;
+    color: #FF4D00;
+}
+
+
+.input-error::placeholder {
+    color: #FF4D00;
+    opacity: 1;
+}
+
+.label-error {
+    color: #FF4D00;
+}
