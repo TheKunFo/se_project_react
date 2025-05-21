@@ -1,130 +1,142 @@
 .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 .modal {
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 1.5rem;
-    width: 320px;
-    position: relative;
-    font-family: sans-serif;
-    font-size: 12px;
-    color: black;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-family: Cabinet Grotesk;
+  width: 496px;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 1.5rem;
+  position: relative;
+  color: black;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
+.modal__label {
+  font-weight: 700;
+}
+
+.modal__image {
+  font-weight: 700;
+}
 .modal h2 {
-    font-weight: bold;
-    margin-bottom: 1rem;
-    font-size: 11px;
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
 }
 
 .modal .close-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: none;
-    border: none;
-    color: gray;
-    cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: gray;
+  cursor: pointer;
 }
 
 .modal .close-btn:hover {
-    color: #555;
+  color: #555;
 }
 
 input[type="text"],
 input[type="url"] {
-    width: 97%;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 1rem;
-    margin-top: 10px;
-    font-size: 12px;
-    background-color: transparent;
-    outline: none;
-    transition: border-color 0.2s;
+  width: 97%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem;
+  margin-top: 10px;
+  font-size: 16px;
+  background-color: transparent;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
 input[type="text"],
 input[type="url"]:focus {
-    border-bottom: 1px solid #007bff;
-
+  border-bottom: 1px solid #007bff;
 }
 
 input[type="text"],
 input[type="url"]:focus {
-    border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
-.modal fieldset {
-    border: none;
-    margin: 0 0 1rem 0;
-    padding: 0;
+.modal__fieldset {
+  border: none;
+  margin: 0 0 1rem 0;
+  padding: 0;
 }
 
-
-
-.modal legend {
-    font-size: 10px;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+.modal__legend {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-.modal .radio-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.3rem;
+.modal__radio-group {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+  color: rgba(0, 0, 0, 0.5);
 }
 
-.modal .radio-group label {
-    font-size: 9px;
+.modal__radio-group:has(:checked) {
+  color: black;
 }
 
+/* .modal__radio-group label {
+} */
 
 .modal-form__button {
-    background-color: #000;
-    color: white;
-    font-size: 10px;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
+  background-color: #000;
+  color: white;
+  font-size: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
 }
 .modal-form__button:hover {
-    background-color: #737373;
+  background-color: #737373;
 }
 
 .modal-form_button_disabled {
-    background-color: #ccc;
-    color: white;
-    font-size: 10px;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 2px;
-
+  background-color: #ccc;
+  color: white;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 2px;
 }
 
 .input-error {
-    border-bottom: 1px solid #FF4D00 !important;
-    color: #FF4D00;
+  border-bottom: 1px solid #ff4d00 !important;
+  color: #ff4d00;
 }
 
-
 .input-error::placeholder {
-    color: #FF4D00;
-    opacity: 1;
+  color: #ff4d00;
+  opacity: 1;
 }
 
 .label-error {
-    color: #FF4D00;
+  color: #ff4d00;
 }
