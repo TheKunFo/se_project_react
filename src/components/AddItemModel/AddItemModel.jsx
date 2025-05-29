@@ -1,5 +1,6 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState, useEffect } from "react";
+import "./AddItemModel.css";
 
 export default function AddItemModel({
     isOpen,
