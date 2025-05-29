@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import ItemModal from '../ItemModal/ItemModal';
 import './ItemCard.css'
+import ItemDelete from '../ItemDelete/ItemDelete';
 
-export default function ItemCard({ name, imgSrc, imgAlt, weather }) {
+export default function ItemCard({ id,name, imgSrc, imgAlt, weather,items,setItems }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [isConfirm, setIsConfirm] = useState(false);
 
     return (
         <>
@@ -22,11 +24,23 @@ export default function ItemCard({ name, imgSrc, imgAlt, weather }) {
 
             {isOpen && (
                 <ItemModal
+                    id={id}
                     imgSrc={imgSrc}
                     imgAlt={imgAlt}
                     name={name}
                     weather={weather}
-                    onClose={() => setIsOpen(false)}
+                    onClose={setIsOpen}
+                    onDelete={setIsConfirm}
+                />
+            )}
+
+            {isConfirm && (
+                <ItemDelete
+                    id={id}
+                    items={items}
+                    setItems={setItems}
+                    onClose={setIsOpen}
+                    onDelete={setIsConfirm}
                 />
             )}
         </>

@@ -1,0 +1,14 @@
+
+.sidebar__profile {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+}
+
+.sidebar__avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    object-fit: cover;
+}
