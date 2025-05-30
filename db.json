@@ -41,12 +41,6 @@
       "name": "Cart Created By admin",
       "link": "http://kato.png",
       "weather": "hot"
-    },
-    {
-      "_id": "1748543202710",
-      "name": "KARET",
-      "link": "http://kato.png",
-      "weather": "cold"
     }
   ]
 }

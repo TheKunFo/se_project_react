@@ -1,4 +1,4 @@
-import AddItemModel from '../AddItemModel/AddItemModel'
+import AddItemModal from '../AddItemModal/AddItemModal'
 import ItemCard from '../ItemCard/ItemCard'
 import './ClothesSection.css'
 
@@ -38,7 +38,7 @@ export default function ClothesSection({
                         />
                     ))}
             </div>
-            <AddItemModel
+            <AddItemModal
                 isOpen={isOpen}
                 onAddItem={onAddItem}
                 onCloseModal={() => setShowModal(false)}
