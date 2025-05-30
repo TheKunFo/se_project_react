@@ -1,7 +1,6 @@
 import "./Header.css";
 import { useState } from "react";
 import logo from "../../assets/logos.png";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 export default function Header({ setShowModal, city }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -18,11 +17,9 @@ export default function Header({ setShowModal, city }) {
         </span>
       </div>
       <div className="header__right">
-        <ToggleSwitch />
         <button className="header__add-btn" onClick={() => setShowModal(true)}>
           + Add clothes
         </button>
-        
         <div className="header__profile">
           <span>Terrence Tegegne</span>
           <img
@@ -34,7 +31,6 @@ export default function Header({ setShowModal, city }) {
             draggable="false"
           />
         </div>
-        
       </div>
     </header>
   );

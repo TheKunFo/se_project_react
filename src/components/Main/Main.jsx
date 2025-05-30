@@ -1,8 +1,6 @@
-import { useContext } from "react";
 import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard";
 import WeatherCard from "../WeatherCard/WeatherCard";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 // Pass props main
 export default function Main({
@@ -12,20 +10,19 @@ export default function Main({
   weatherType,
   weatherInfo,
   items,
-  setItems,
   isSubmitEnabled,
   handleSubmit,
   errors,
   formData,
   handleChange,
-  
 }) {
-  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  console.log(weatherInfo);
+
   return (
     <>
       <main className="main">
         <WeatherCard
-          temperature={temperature?.[currentTemperatureUnit]}
+          temperature={temperature}
           weatherType={weatherType}
           weatherInfo={weatherInfo}
         />
@@ -36,13 +33,10 @@ export default function Main({
             .map((item) => (
               <ItemCard
                 key={item._id}
-                id={item._id}
                 name={item.name}
                 imgAlt={item.name}
                 imgSrc={item.link}
                 weather={item.weather}
-                items={items}
-                setItems={setItems}
               />
             ))}
         </section>
