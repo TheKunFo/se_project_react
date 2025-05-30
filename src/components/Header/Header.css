@@ -37,6 +37,13 @@
     user-select: none;
 }
 
+.header__center {
+    display: flex;
+    width: 60%;
+    align-items: center;
+    justify-content: end;
+}
+
 .header__add-btn {
     background: none;
     border: none;
@@ -67,6 +74,19 @@
     object-fit: cover;
 }
 
+.header__profile-link {
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+}
+
+.header__profile-link span {
+    color: black;
+}
+
 @media (max-width: 768px) {
     .header {
         display: flex;
@@ -89,6 +109,11 @@
         user-select: none;
     }
 
+    .header__center {
+        width: 20%;
+        align-items: start;
+    }
+
     .header__right {
         display: flex;
         flex-direction: column;
@@ -102,6 +127,6 @@
 
     .header__profile {
         order: 1;
-        
+
     }
 }

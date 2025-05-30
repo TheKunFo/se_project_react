@@ -1,0 +1,68 @@
+.modal__delete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal__delete-content {
+    width: 670px;
+    height: 280px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    border-radius: 16px;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.modal__delete-title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+
+.modal__delete-button {
+    color: #FF4D00;
+    margin-top: 20px;
+    font-size: 20px;
+    border: none;
+    font-weight: 700;
+    line-height: 24px;
+    background: none;
+    cursor: pointer;
+}
+
+.modal__delete-cancel {
+    margin-top: 10px;
+    font-size: 20px;
+    border: none;
+    font-weight: 700;
+    line-height: 24px;
+    background: none;
+    cursor: pointer;
+}
+
+@media (max-width: 640px) {
+    .modal__delete-content {
+        width: 250px;
+        height: 150px;
+    }
+
+    .modal__delete-title, .modal__delete-button, .modal__delete-cancel {
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+    .modal__delete-button, .modal__delete-cancel {
+        margin-top: 5px;
+    }
+}

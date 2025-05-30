@@ -1,0 +1,19 @@
+.profile {
+    padding: 0.5rem 2.5rem 1.5rem;
+    flex-grow: 1;
+    background-color: #f3f3f3;
+    display: flex;
+}
+
+.sidebar__section {
+    padding: 10px;
+    width: 300px;
+    height: auto;
+}
+
+.clother__section {
+    padding: 10px;
+    height: auto;
+    width: 100%;
+
+}

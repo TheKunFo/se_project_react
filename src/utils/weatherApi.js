@@ -11,17 +11,21 @@ export const getWeather = () => {
             return res.json();
         })
         .then((data) => {
-            const temperature = data.main.temp;
+            const temperature = {
+                F : Math.round(data.main.temp),
+                C : Math.round((data.main.temp - 32) * 5 / 9),
+            }
             const city = data.name;
-            const weatherType = defineWeatherType(temperature);
+            const weatherType = defineWeatherType(data.main.temp)
             const weatherInfo = data.weather[0]
-            
             return {
                 temperature,
                 city,
                 weatherType,
                 weatherInfo,
             };
+        }).catch((err) => {
+            console.log(err)
         });
 };
 
