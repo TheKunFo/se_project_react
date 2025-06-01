@@ -14,39 +14,39 @@ export default function Main({
   items,
   setItems,
   isSubmitEnabled,
-  handleSubmit,
+  handleCardFormSubmit,
   errors,
   formData,
   handleChange,
-  
+
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   return (
-    <>
-      <main className="main">
-        <WeatherCard
-          temperature={temperature?.[currentTemperatureUnit]}
-          weatherType={weatherType}
-          weatherInfo={weatherInfo}
-        />
 
-        <section className="item-list">
-          {items
-            .filter((item) => item.weather === weatherType)
-            .map((item) => (
-              <ItemCard
-                key={item._id}
-                id={item._id}
-                name={item.name}
-                imgAlt={item.name}
-                imgSrc={item.link}
-                weather={item.weather}
-                items={items}
-                setItems={setItems}
-              />
-            ))}
-        </section>
-      </main>
-    </>
+    <main className="main">
+      <WeatherCard
+        temperature={temperature?.[currentTemperatureUnit]}
+        weatherType={weatherType}
+        weatherInfo={weatherInfo}
+      />
+
+      <section className="item-list">
+        {items
+          .filter((item) => item.weather === weatherType)
+          .map((item) => (
+            <ItemCard
+              key={item._id}
+              id={item._id}
+              name={item.name}
+              imgAlt={item.name}
+              imgSrc={item.link}
+              weather={item.weather}
+              items={items}
+              setItems={setItems}
+            />
+          ))}
+      </section>
+    </main>
+
   );
 }

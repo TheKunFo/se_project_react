@@ -15,8 +15,9 @@ function App() {
   const [weather, setWeather] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
 
-  const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit((prevUnit) => (prevUnit === 'F' ? 'C' : 'F'));
+  const handleToggleSwitchChange = (e) => {
+    const checked = e.target.checked
+    setCurrentTemperatureUnit(e.target.checked ? 'C' : 'F');
   };
   useEffect(() => {
     const fetchWeather = async () => {
@@ -35,13 +36,13 @@ function App() {
     const fetchApiItems = async () => {
       try {
         const data = await itemsApiGet();
-        setItems(data)
+        setItems(data);
       } catch (error) {
-        console.log(error)
+        console.error('Error saat fetch items:', error);
+        alert('Gagal memuat data, silakan coba lagi.');
       }
-
     }
-    fetchApiItems()
+    fetchApiItems();
   }, []);
 
   const [formData, setFormData] = useState({
@@ -52,7 +53,7 @@ function App() {
   const [errors, setErrors] = useState({ name: "", image: "" });
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleCardFormSubmit = (e) => {
     e.preventDefault();
     const newItem = {
       _id: Date.now().toString(),
@@ -63,7 +64,7 @@ function App() {
 
     const data = createItems(newItem);
     if (data) {
-      setItems((prevItems) => [...prevItems, newItem]);
+      setItems((prevItems) => [newItem, ...prevItems]);
     }
 
     // Reset form
@@ -96,7 +97,7 @@ function App() {
   return (
     <div className="app">
       <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, setCurrentTemperatureUnit }} >
-        <Header setShowModal={setShowModal} city={weather.city} />
+        <Header setShowModal={setShowModal} city={weather.city} handleToggleSwitchChange={handleToggleSwitchChange} />
 
         <Routes>
           <Route path="/" element={
@@ -109,7 +110,7 @@ function App() {
               items={items}
               setItems={setItems}
               isSubmitEnabled={isSubmitEnabled}
-              handleSubmit={handleSubmit}
+              handleCardFormSubmit={handleCardFormSubmit}
               errors={errors}
               formData={formData}
               handleChange={handleChange}
@@ -123,7 +124,7 @@ function App() {
               setItems={setItems}
               weatherType={weather.weatherType}
               isOpen={showModal}
-              onAddItem={handleSubmit}
+              onAddItem={handleCardFormSubmit}
               isSubmitEnabled={isSubmitEnabled}
               handleChange={handleChange}
               formData={formData}
@@ -140,7 +141,7 @@ function App() {
           title="New Garment"
           name="add-garment"
           buttonText="Add Garment"
-          onSubmit={handleSubmit}
+          onSubmit={handleCardFormSubmit}
           isSubmitEnabled={isSubmitEnabled}
         >
           <label
@@ -173,8 +174,8 @@ function App() {
             className={errors.image ? "input-error" : ""}
             placeholder="Image URL"
           />
-          <fieldset class="modal__fieldset">
-            <legend class="modal__legend">Select the weather type:</legend>
+          <fieldset className="modal__fieldset">
+            <legend className="modal__legend">Select the weather type:</legend>
             <div className="modal__radio-group">
               <input
                 type="radio"

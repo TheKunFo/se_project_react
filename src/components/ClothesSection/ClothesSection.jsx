@@ -1,4 +1,4 @@
-import AddItemModal from '../AddItemModal/AddItemModal'
+
 import ItemCard from '../ItemCard/ItemCard'
 import './ClothesSection.css'
 
@@ -24,7 +24,6 @@ export default function ClothesSection({
             </div>
             <div className="clother__items">
                 {items
-                    .filter((item) => item.weather === weatherType)
                     .map((item) => (
                         <ItemCard
                             key={item._id}
@@ -38,15 +37,6 @@ export default function ClothesSection({
                         />
                     ))}
             </div>
-            <AddItemModal
-                isOpen={isOpen}
-                onAddItem={onAddItem}
-                onCloseModal={() => setShowModal(false)}
-                isSubmitEnabled={isSubmitEnabled}
-                handleChange={handleChange}
-                formData={formData}
-                errors={errors}
-            />
         </div>
     )
 }

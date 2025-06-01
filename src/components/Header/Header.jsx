@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logos.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-export default function Header({ setShowModal, city }) {
+export default function Header({ setShowModal, city ,handleToggleSwitchChange}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -22,7 +22,9 @@ export default function Header({ setShowModal, city }) {
       </div>
       <div className="header__center">
 
-        <ToggleSwitch />
+        <ToggleSwitch 
+          handleToggleSwitchChange={handleToggleSwitchChange}
+        />
       </div>
       <div className="header__right">
         <button className="header__add-btn" onClick={() => setShowModal(true)}>
