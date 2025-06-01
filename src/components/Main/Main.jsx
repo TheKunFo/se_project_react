@@ -28,6 +28,7 @@ export default function Main({
         temperature={temperature?.[currentTemperatureUnit]}
         weatherType={weatherType}
         weatherInfo={weatherInfo}
+        
       />
 
       <section className="item-list">
