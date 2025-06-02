@@ -1,39 +1,26 @@
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import './AddItemModal.css'
-import { useState, useEffect } from "react";
+
+import './AddItemModal.css';
+import ModalWithForm from '../ModalWithForm/ModalWithForm';
 
 export default function AddItemModal({
-    isOpen,
-    onAddItem,
-    onCloseModal,
+    showModal,
+    setShowModal,
+    handleCardFormSubmit,
     isSubmitEnabled,
-    handleChange,
-    formData,
     errors,
+    formData,
+    handleCardFormChange,
+
 }) {
-    const [name, setName] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
-    const [weather, setWeather] = useState("");
-
-    useEffect(() => {
-        if (isOpen) {
-            setName("");
-            setImageUrl("");
-            setWeather("");
-        }
-    }, [isOpen]);
-
-
-
     return (
-        <>
+        <section className='add__item-modal'>
             <ModalWithForm
-                isOpen={isOpen}
-                onClose={onCloseModal}
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
                 title="New Garment"
                 name="add-garment"
                 buttonText="Add Garment"
-                onSubmit={onAddItem}
+                onSubmit={handleCardFormSubmit}
                 isSubmitEnabled={isSubmitEnabled}
             >
                 <label
@@ -47,7 +34,7 @@ export default function AddItemModal({
                     name="name"
                     type="text"
                     value={formData.name}
-                    onChange={handleChange}
+                    onChange={handleCardFormChange}
                     className={errors.name ? "input-error" : ""}
                     placeholder="Name"
                 />
@@ -62,12 +49,12 @@ export default function AddItemModal({
                     name="image"
                     type="url"
                     value={formData.image}
-                    onChange={handleChange}
+                    onChange={handleCardFormChange}
                     className={errors.image ? "input-error" : ""}
                     placeholder="Image URL"
                 />
-                <fieldset class="modal__fieldset">
-                    <legend class="modal__legend">Select the weather type:</legend>
+                <fieldset className="modal__fieldset">
+                    <legend className="modal__legend">Select the weather type:</legend>
                     <div className="modal__radio-group">
                         <input
                             type="radio"
@@ -75,7 +62,7 @@ export default function AddItemModal({
                             name="weather"
                             value="hot"
                             checked={formData.weather === "hot"}
-                            onChange={handleChange}
+                            onChange={handleCardFormChange}
                         />
                         <label htmlFor="hot">Hot</label>
                     </div>
@@ -86,7 +73,7 @@ export default function AddItemModal({
                             name="weather"
                             value="warm"
                             checked={formData.weather === "warm"}
-                            onChange={handleChange}
+                            onChange={handleCardFormChange}
                         />
                         <label htmlFor="warm">Warm</label>
                     </div>
@@ -97,12 +84,12 @@ export default function AddItemModal({
                             name="weather"
                             value="cold"
                             checked={formData.weather === "cold"}
-                            onChange={handleChange}
+                            onChange={handleCardFormChange}
                         />
                         <label htmlFor="cold">Cold</label>
                     </div>
                 </fieldset>
             </ModalWithForm>
-        </>
+        </section>
     )
 }

@@ -4,11 +4,11 @@ import Main from "../Main/main";
 import Footer from "../Footer/Footer";
 import { useEffect, useState } from "react";
 import { getWeather } from "../../utils/weatherApi";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import { itemsApiGet, createItems } from "../../utils/itemsApi";
+import AddItemModal from "../AddItemModal/AddItemModal";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -62,19 +62,21 @@ function App() {
       weather: formData.weather,
     };
 
-    const data = createItems(newItem);
-    if (data) {
-      setItems((prevItems) => [newItem, ...prevItems]);
-    }
-
-    // Reset form
-    setShowModal(false);
-    setFormData({ name: "", image: "", weather: "hot" });
-    setErrors({ name: "", image: "" });
-    setIsSubmitEnabled(false);
+    createItems(newItem)
+      .then((res) => {
+        setItems((prevItems) => [res, ...prevItems]);
+      }).catch((err) => {
+        console.error("Error creating item:", err);
+      })
+      .finally(() => {
+        setShowModal(false);
+        setFormData({ name: "", image: "", weather: "hot" });
+        setErrors({ name: "", image: "" });
+        setIsSubmitEnabled(false);
+      });;
   };
 
-  const handleChange = (e) => {
+  const handleCardFormChange = (e) => {
     const { name, value } = e.target;
     const newForm = { ...formData, [name]: value };
     setFormData(newForm);
@@ -113,7 +115,7 @@ function App() {
               handleCardFormSubmit={handleCardFormSubmit}
               errors={errors}
               formData={formData}
-              handleChange={handleChange}
+              handleChange={handleCardFormChange}
 
             />
           } ></Route>
@@ -126,7 +128,7 @@ function App() {
               isOpen={showModal}
               onAddItem={handleCardFormSubmit}
               isSubmitEnabled={isSubmitEnabled}
-              handleChange={handleChange}
+              handleChange={handleCardFormChange}
               formData={formData}
               errors={errors}
             />
@@ -135,82 +137,15 @@ function App() {
 
 
         <Footer />
-        <ModalWithForm
-          isOpen={showModal}
-          onClose={() => setShowModal(false)}
-          title="New Garment"
-          name="add-garment"
-          buttonText="Add Garment"
-          onSubmit={handleCardFormSubmit}
+        <AddItemModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          handleCardFormSubmit={handleCardFormSubmit}
           isSubmitEnabled={isSubmitEnabled}
-        >
-          <label
-            htmlFor="name"
-            className={`modal__label ${errors.name ? "label-error" : ""}`}
-          >
-            Name {errors.name && `(${errors.name})`}
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            value={formData.name}
-            onChange={handleChange}
-            className={errors.name ? "input-error" : ""}
-            placeholder="Name"
-          />
-          <label
-            htmlFor="image"
-            className={`modal__image ${errors.image ? "label-error" : ""}`}
-          >
-            Image {errors.image && `(${errors.image})`}
-          </label>
-          <input
-            id="image"
-            name="image"
-            type="url"
-            value={formData.image}
-            onChange={handleChange}
-            className={errors.image ? "input-error" : ""}
-            placeholder="Image URL"
-          />
-          <fieldset className="modal__fieldset">
-            <legend className="modal__legend">Select the weather type:</legend>
-            <div className="modal__radio-group">
-              <input
-                type="radio"
-                id="hot"
-                name="weather"
-                value="hot"
-                checked={formData.weather === "hot"}
-                onChange={handleChange}
-              />
-              <label htmlFor="hot">Hot</label>
-            </div>
-            <div className="modal__radio-group">
-              <input
-                type="radio"
-                id="warm"
-                name="weather"
-                value="warm"
-                checked={formData.weather === "warm"}
-                onChange={handleChange}
-              />
-              <label htmlFor="warm">Warm</label>
-            </div>
-            <div className="modal__radio-group">
-              <input
-                type="radio"
-                id="cold"
-                name="weather"
-                value="cold"
-                checked={formData.weather === "cold"}
-                onChange={handleChange}
-              />
-              <label htmlFor="cold">Cold</label>
-            </div>
-          </fieldset>
-        </ModalWithForm>
+          errors={errors}
+          formData={formData}
+          handleCardFormChange={handleCardFormChange}
+        />
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );

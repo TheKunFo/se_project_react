@@ -9,14 +9,18 @@ export default function ItemDelete({
     onDelete,
 }) {
     const handleDeleteItem = () => {
-        const data = deleteItems(id)
-        if(data)
-        {
-            const newRow = items.filter(item => item._id !== id)
-            setItems(newRow)
-
-        }
-        onDelete(false)
+        deleteItems(id)
+            .then((res) => {
+                if(res){
+                    const newRow = items.filter(item => item._id !== id)
+                    setItems(newRow)
+                }
+            }).catch((err) => {
+                console.error("Error creating item:", err);
+            }).finally(() => {
+                onDelete(false)
+            })
+        
     }
 
     const handleCancelItem = () => {
