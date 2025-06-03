@@ -14,7 +14,6 @@ export const createItems = (item) => {
         body: JSON.stringify(item),
     })
         .then(checkResponse)
-        .then(data => !!data); 
 };
 
 export const deleteItems = (id) => {
@@ -22,7 +21,6 @@ export const deleteItems = (id) => {
         method: 'DELETE',
     })
         .then(checkResponse)
-        .then(data => !!data);
 };
 
 const checkResponse = (res) => {

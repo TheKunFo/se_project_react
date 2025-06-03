@@ -65,15 +65,13 @@ function App() {
     createItems(newItem)
       .then((res) => {
         setItems((prevItems) => [res, ...prevItems]);
-      }).catch((err) => {
-        console.error("Error creating item:", err);
-      })
-      .finally(() => {
         setShowModal(false);
         setFormData({ name: "", image: "", weather: "hot" });
         setErrors({ name: "", image: "" });
         setIsSubmitEnabled(false);
-      });;
+      }).catch((err) => {
+        console.error("Error creating item:", err);
+      })
   };
 
   const handleCardFormChange = (e) => {
