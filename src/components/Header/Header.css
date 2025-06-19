@@ -67,6 +67,22 @@
     cursor: pointer;
 }
 
+.header__profile button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    padding-inline: 9px;
+}
+
+.header__profile button:hover {
+    text-decoration: underline;
+}
+.header__profile button:focus {
+    outline: none;
+}
+
 .header__avatar {
     width: 2rem;
     height: 2rem;

@@ -30,7 +30,7 @@ export default function ClothesSection({
                             id={item._id}
                             name={item.name}
                             imgAlt={item.name}
-                            imgSrc={item.link}
+                            imgSrc={item.imageUrl}
                             weather={item.weather}
                             items={items}
                             setItems={setItems}

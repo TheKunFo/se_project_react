@@ -18,6 +18,8 @@ export default function Main({
   errors,
   formData,
   handleChange,
+  onCardLike,
+  isLoggedIn,
 
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
@@ -40,10 +42,14 @@ export default function Main({
               id={item._id}
               name={item.name}
               imgAlt={item.name}
-              imgSrc={item.link}
+              imgSrc={item.imageUrl}
               weather={item.weather}
               items={items}
+              likes={item.likes}
+              owner={item.owner}
               setItems={setItems}
+              onCardLike={onCardLike}
+              isLoggedIn={isLoggedIn}
             />
           ))}
       </section>

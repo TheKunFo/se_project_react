@@ -1,4 +1,3 @@
-
 .sidebar__profile {
     display: flex;
     align-items: center;
@@ -11,4 +10,37 @@
     height: 2rem;
     border-radius: 9999px;
     object-fit: cover;
+}
+
+.sidebar__menu {
+    padding-block: 15px;
+}
+
+.sidebar__menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar__menu li {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.sidebar__menu button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    padding-inline: 9px;
+    font-weight: bold;
+}
+
+.sidebar__menu button:hover {
+    text-decoration: underline;
+}
+
+.sidebar__menu button:focus {
+    outline: none;
 }

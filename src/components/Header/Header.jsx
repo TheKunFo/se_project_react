@@ -1,13 +1,32 @@
 import "./Header.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logos.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-export default function Header({ setShowModal, city ,handleToggleSwitchChange}) {
+import SignUp from "../Auth/SignUp";
+import SignIn from "../Auth/SignIn";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+export default function Header({
+  setShowModal,
+  city,
+  handleToggleSwitchChange,
+  showSignUp,
+  setShowSignUp,
+  showSignIn,
+  setShowSignIn,
+  isSubmitEnabled,
+  setIsSubmitEnabled,
+  isLoggedIn,
+  setIsLoggedIn,
+  setCurrentUser,
+}) {
+
+  const currentUser = useContext(CurrentUserContext)
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
   return (
     <header className="header">
       <div className="header__left">
@@ -22,30 +41,55 @@ export default function Header({ setShowModal, city ,handleToggleSwitchChange}) 
       </div>
       <div className="header__center">
 
-        <ToggleSwitch 
+        <ToggleSwitch
           handleToggleSwitchChange={handleToggleSwitchChange}
         />
       </div>
       <div className="header__right">
-        <button className="header__add-btn" onClick={() => setShowModal(true)}>
-          + Add clothes
-        </button>
+        {isLoggedIn ? (
+          <button className="header__add-btn" onClick={() => setShowModal(true)}>
+            + Add clothes
+          </button>
+        ) : null}
 
         <div className="header__profile">
-          <Link to="/profile" className="header__profile-link" >
-            <span>Terrence Tegegne</span>
-            <img
-              alt="Profile avatar"
-              className="header__avatar"
-              src="https://storage.googleapis.com/a1aa/image/a83da40a-5b97-4e09-64b6-cf7892ea912b.jpg"
-              width="32"
-              height="32"
-              draggable="false"
-            />
-          </Link>
+          {isLoggedIn ? (
+            <Link to="/profile" className="header__profile-link" >
+              <span>{currentUser.name}</span>
+              <img
+                alt="Profile avatar"
+                className="header__avatar"
+                src={currentUser.avatar}
+                width="32"
+                height="32"
+                draggable="false"
+              />
+            </Link>
+          ) : (
+            <>
+              <button onClick={() => setShowSignUp(true)} >Sign Up</button>
+              <button onClick={() => setShowSignIn(true)} >Log in</button>
+            </>
+          )
+          }
+
         </div>
 
       </div>
+      <SignUp
+        showModal={showSignUp}
+        setShowModal={setShowSignUp}
+        isSubmitEnabled={isSubmitEnabled}
+        setIsSubmitEnabled={setIsSubmitEnabled}
+      />
+      <SignIn
+        showModal={showSignIn}
+        setShowModal={setShowSignIn}
+        isSubmitEnabled={isSubmitEnabled}
+        setIsSubmitEnabled={setIsSubmitEnabled}
+        setIsLoggedIn={setIsLoggedIn}
+        setCurrentUser={setCurrentUser}
+      />
     </header>
   );
 }

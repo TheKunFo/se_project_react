@@ -1,4 +1,5 @@
 import { APIkey, latitude, longitude } from './constants';
+import { checkResponse } from "./response";
 
 export const getWeather = () => {
     return fetch(
@@ -32,9 +33,3 @@ export const defineWeatherType = (temperature) => {
     }
 };
 
-const checkResponse = (res) => {
-    if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-    }
-    return res.json();
-};

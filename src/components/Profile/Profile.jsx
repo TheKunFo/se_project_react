@@ -11,17 +11,29 @@ export default function Profile({
     isOpen,
     onAddItem,
     isSubmitEnabled,
+    setIsSubmitEnabled,
     handleChange,
     formData,
-    errors
+    errors,
+    isLoggedIn,
+    showUpdateProfile,
+    setShowUpdateProfile,
+    setCurrentUser,
 }) {
     return (
         <div className="profile">
             <div className="sidebar__section">
-                <Sidebar />
+                <Sidebar
+                    isLoggedIn={isLoggedIn}
+                    showUpdateProfile={showUpdateProfile}
+                    setShowUpdateProfile={setShowUpdateProfile}
+                    isSubmitEnabled={isSubmitEnabled}
+                    setIsSubmitEnabled={setIsSubmitEnabled}
+                    setCurrentUser={setCurrentUser}
+                />
             </div>
             <div className="clother__section">
-                <ClothesSection 
+                <ClothesSection
                     setShowModal={setShowModal}
                     items={items}
                     setItems={setItems}
