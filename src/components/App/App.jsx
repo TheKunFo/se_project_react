@@ -93,6 +93,7 @@ function App() {
     createItems(newItem)
       .then((res) => {
         setItems((prevItems) => [res.data, ...prevItems]);
+        setShowModal(false);
         setFormData({ name: "", image: "", weather: "hot" });
         setErrors({ name: "", image: "" });
         setIsSubmitEnabled(false);
@@ -100,7 +101,7 @@ function App() {
         console.error("Error creating item:", err);
       }).finally(() => {
         setIsLoading(false)
-        setShowModal(false);
+        
       })
   };
 

@@ -114,7 +114,7 @@ export default function SignUp({
             isSubmitEnabled={isSubmitEnabled}
             optionButton={
                 <>
-                    <button className="button__parse" onClick={handleParse} >or Sign up</button>
+                    <button type="button" className="button__parse" onClick={handleParse} >or Log in</button>
                 </>
             }
         >
@@ -132,6 +132,7 @@ export default function SignUp({
                 onChange={handleSignUpFormChange}
                 className={errors.email ? "input-error" : ""}
                 placeholder="email"
+                autoComplete="email"
             />
 
             <label
@@ -148,6 +149,7 @@ export default function SignUp({
                 onChange={handleSignUpFormChange}
                 className={errors.password ? "input-error" : ""}
                 placeholder="Password"
+                autoComplete="new-password"
             />
 
             <label

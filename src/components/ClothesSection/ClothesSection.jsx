@@ -34,6 +34,7 @@ export default function ClothesSection({
                             imgSrc={item.imageUrl}
                             weather={item.weather}
                             items={items}
+                            owner={item.owner}
                             likes={item.likes}
                             setItems={setItems}
                             isLoggedIn={isLoggedIn}

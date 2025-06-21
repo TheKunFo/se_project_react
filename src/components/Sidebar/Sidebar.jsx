@@ -1,8 +1,7 @@
 import { useContext } from 'react';
 import './Sidebar.css';
+import { useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import {useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import EditProfileModal from '../EditProfileModal/EditProfileModal';
 
 
@@ -17,13 +16,12 @@ export default function Sidebar({
 }) {
 
     const currentUser = useContext(CurrentUserContext);
-
+    const navigate = useNavigate()
     const handleLogout = () => {
         localStorage.removeItem('jwt');
         setIsLoggedIn(false)
         setCurrentUser({})
         navigate('/')
-        
     }
 
     return (
