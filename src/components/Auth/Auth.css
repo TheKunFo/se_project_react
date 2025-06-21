@@ -1,0 +1,16 @@
+.button__parse {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    color: #ccc;
+    padding-inline: 9px;
+}
+
+.button__parse:hover {
+    text-decoration: underline;
+}
+.button__parse:focus {
+    outline: none;
+}

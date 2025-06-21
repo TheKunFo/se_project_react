@@ -10,6 +10,7 @@ export default function AddItemModal({
     errors,
     formData,
     handleCardFormChange,
+    isLoading,
 
 }) {
     return (
@@ -19,7 +20,7 @@ export default function AddItemModal({
                 onClose={() => setShowModal(false)}
                 title="New Garment"
                 name="add-garment"
-                buttonText="Add Garment"
+                buttonText={isLoading ? 'Saving...' : 'Add Garment'}
                 onSubmit={handleCardFormSubmit}
                 isSubmitEnabled={isSubmitEnabled}
             >

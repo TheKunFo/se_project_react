@@ -13,6 +13,7 @@ export default function ClothesSection({
     handleChange,
     formData,
     errors,
+    isLoggedIn,
 }) {
     return (
         <div className='clothes'>
@@ -33,7 +34,9 @@ export default function ClothesSection({
                             imgSrc={item.imageUrl}
                             weather={item.weather}
                             items={items}
+                            likes={item.likes}
                             setItems={setItems}
+                            isLoggedIn={isLoggedIn}
                         />
                     ))}
             </div>

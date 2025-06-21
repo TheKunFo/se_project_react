@@ -11,6 +11,7 @@ import { itemsApiGet, createItems, removeCardLike, addCardLike } from "../../uti
 import AddItemModal from "../AddItemModal/AddItemModal";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { checkToken } from "../../utils/auth";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +22,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [weather, setWeather] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleToggleSwitchChange = (e) => {
     const checked = e.target.checked
@@ -86,15 +89,18 @@ function App() {
       weather: formData.weather,
     };
 
+    setIsLoading(true)
     createItems(newItem)
       .then((res) => {
         setItems((prevItems) => [res.data, ...prevItems]);
-        setShowModal(false);
         setFormData({ name: "", image: "", weather: "hot" });
         setErrors({ name: "", image: "" });
         setIsSubmitEnabled(false);
       }).catch((err) => {
         console.error("Error creating item:", err);
+      }).finally(() => {
+        setIsLoading(false)
+        setShowModal(false);
       })
   };
 
@@ -176,23 +182,26 @@ function App() {
               />
             } ></Route>
             <Route path="/profile" element={
-              <Profile
-                setShowModal={setShowModal}
-                items={items}
-                setItems={setItems}
-                weatherType={weather.weatherType}
-                isOpen={showModal}
-                onAddItem={handleCardFormSubmit}
-                isSubmitEnabled={isSubmitEnabled}
-                setIsSubmitEnabled={setIsSubmitEnabled}
-                handleChange={handleCardFormChange}
-                formData={formData}
-                errors={errors}
-                isLoggedIn={isLoggedIn}
-                showUpdateProfile={showUpdateProfile}
-                setShowUpdateProfile={setShowUpdateProfile}
-                setCurrentUser={setCurrentUser}
-              />
+              <ProtectedRoute isLoggedIn={isLoggedIn} >
+                <Profile
+                  setShowModal={setShowModal}
+                  items={items}
+                  setItems={setItems}
+                  weatherType={weather.weatherType}
+                  isOpen={showModal}
+                  onAddItem={handleCardFormSubmit}
+                  isSubmitEnabled={isSubmitEnabled}
+                  setIsSubmitEnabled={setIsSubmitEnabled}
+                  handleChange={handleCardFormChange}
+                  formData={formData}
+                  errors={errors}
+                  isLoggedIn={isLoggedIn}
+                  showUpdateProfile={showUpdateProfile}
+                  setShowUpdateProfile={setShowUpdateProfile}
+                  setCurrentUser={setCurrentUser}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              </ProtectedRoute>
             } />
           </Routes>
 
@@ -206,6 +215,7 @@ function App() {
             errors={errors}
             formData={formData}
             handleCardFormChange={handleCardFormChange}
+            isLoading={isLoading}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>

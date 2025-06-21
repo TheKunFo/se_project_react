@@ -10,7 +10,8 @@ export default function ModalWithForm({
     buttonText,
     children,
     onSubmit,
-    isSubmitEnabled
+    isSubmitEnabled,
+    optionButton = '',
 }) {
     useModalClose(isOpen, onClose);
 
@@ -42,6 +43,7 @@ export default function ModalWithForm({
                     >
                         {buttonText}
                     </button>
+                    {optionButton}
                 </form>
             </div>
         </div>

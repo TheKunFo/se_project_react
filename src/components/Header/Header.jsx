@@ -81,6 +81,7 @@ export default function Header({
         setShowModal={setShowSignUp}
         isSubmitEnabled={isSubmitEnabled}
         setIsSubmitEnabled={setIsSubmitEnabled}
+        setShowSignIn={setShowSignIn}
       />
       <SignIn
         showModal={showSignIn}
@@ -89,6 +90,7 @@ export default function Header({
         setIsSubmitEnabled={setIsSubmitEnabled}
         setIsLoggedIn={setIsLoggedIn}
         setCurrentUser={setCurrentUser}
+        setShowSignUp={setShowSignUp}
       />
     </header>
   );

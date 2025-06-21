@@ -13,17 +13,18 @@ export default function Sidebar({
     isSubmitEnabled,
     setIsSubmitEnabled,
     setCurrentUser,
+    setIsLoggedIn,
 }) {
 
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!isLoggedIn) {
-            navigate('/');
-        }
-    }, [isLoggedIn, navigate]);
     const currentUser = useContext(CurrentUserContext);
 
+    const handleLogout = () => {
+        localStorage.removeItem('jwt');
+        setIsLoggedIn(false)
+        setCurrentUser({})
+        navigate('/')
+        
+    }
 
     return (
         <div className='sidebar'>
@@ -44,7 +45,7 @@ export default function Sidebar({
                         <button onClick={() => setShowUpdateProfile(true)} >Change profile data</button>
                     </li>
                     <li>
-                        <button>Logout</button>
+                        <button onClick={handleLogout} >Logout</button>
                     </li>
                 </ul>
             </div>

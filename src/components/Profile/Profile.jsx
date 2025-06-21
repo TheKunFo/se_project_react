@@ -19,6 +19,7 @@ export default function Profile({
     showUpdateProfile,
     setShowUpdateProfile,
     setCurrentUser,
+    setIsLoggedIn,
 }) {
     return (
         <div className="profile">
@@ -30,6 +31,7 @@ export default function Profile({
                     isSubmitEnabled={isSubmitEnabled}
                     setIsSubmitEnabled={setIsSubmitEnabled}
                     setCurrentUser={setCurrentUser}
+                    setIsLoggedIn={setIsLoggedIn}
                 />
             </div>
             <div className="clother__section">
@@ -44,6 +46,7 @@ export default function Profile({
                     handleChange={handleChange}
                     formData={formData}
                     errors={errors}
+                    isLoggedIn={isLoggedIn}
                 />
             </div>
         </div>

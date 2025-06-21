@@ -7,6 +7,7 @@ export default function SignUp({
     setShowModal,
     isSubmitEnabled,
     setIsSubmitEnabled,
+    setShowSignIn,
 }) {
     const [errors, setErrors] = useState({
         email: "",
@@ -95,6 +96,13 @@ export default function SignUp({
 
         setShowModal(false);
     };
+
+    const handleParse = () => {
+        setShowModal(false)
+        setShowSignIn(true)
+        
+    }
+
     return (
         <ModalWithForm
             isOpen={showModal}
@@ -104,6 +112,11 @@ export default function SignUp({
             buttonText="Sign Up"
             onSubmit={handleSignUpFormSubmit}
             isSubmitEnabled={isSubmitEnabled}
+            optionButton={
+                <>
+                    <button className="button__parse" onClick={handleParse} >or Sign up</button>
+                </>
+            }
         >
             <label
                 htmlFor="email"
