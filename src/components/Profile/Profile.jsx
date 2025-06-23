@@ -20,6 +20,7 @@ export default function Profile({
     setShowUpdateProfile,
     setCurrentUser,
     setIsLoggedIn,
+    handleCardLike,
 }) {
     return (
         <div className="profile">
@@ -47,6 +48,7 @@ export default function Profile({
                     formData={formData}
                     errors={errors}
                     isLoggedIn={isLoggedIn}
+                    handleCardLike={handleCardLike}
                 />
             </div>
         </div>
