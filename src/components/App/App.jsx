@@ -7,7 +7,12 @@ import { getWeather } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "../Profile/Profile";
-import { itemsApiGet, createItems, removeCardLike, addCardLike } from "../../utils/itemsApi";
+import {
+  itemsApiGet,
+  createItems,
+  removeCardLike,
+  addCardLike,
+} from "../../utils/itemsApi";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { checkToken } from "../../utils/auth";
@@ -18,16 +23,15 @@ function App() {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showUpdateProfile, setShowUpdateProfile] = useState(false);
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [weather, setWeather] = useState([]);
-  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
 
-
   const handleToggleSwitchChange = (e) => {
-    const checked = e.target.checked
-    setCurrentTemperatureUnit(e.target.checked ? 'C' : 'F');
+    const checked = e.target.checked;
+    setCurrentTemperatureUnit(e.target.checked ? "C" : "F");
   };
   useEffect(() => {
     const fetchWeather = async () => {
@@ -48,15 +52,15 @@ function App() {
         const data = await itemsApiGet();
         setItems(data);
       } catch (error) {
-        console.error('Error saat fetch items:', error);
-        alert('Gagal memuat data, silakan coba lagi.');
+        console.error("Error saat fetch items:", error);
+        alert("Gagal memuat data, silakan coba lagi.");
       }
-    }
+    };
     fetchApiItems();
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem("jwt");
 
     if (token) {
       checkToken(token)
@@ -65,10 +69,10 @@ function App() {
           setCurrentUser(userData.data);
         })
         .catch((err) => {
-          console.error('Token invalid or expired:', err);
+          console.error("Token invalid or expired:", err);
           setIsLoggedIn(false);
           setCurrentUser({});
-          localStorage.removeItem('jwt');
+          localStorage.removeItem("jwt");
         });
     }
   }, []);
@@ -89,7 +93,7 @@ function App() {
       weather: formData.weather,
     };
 
-    setIsLoading(true)
+    setIsLoading(true);
     createItems(newItem)
       .then((res) => {
         setItems((prevItems) => [res.data, ...prevItems]);
@@ -97,32 +101,28 @@ function App() {
         setFormData({ name: "", image: "", weather: "hot" });
         setErrors({ name: "", image: "" });
         setIsSubmitEnabled(false);
-      }).catch((err) => {
-        console.error("Error creating item:", err);
-      }).finally(() => {
-        setIsLoading(false)
-        
       })
+      .catch((err) => {
+        console.error("Error creating item:", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleCardLike = ({ id, isLiked }) => {
-    const likeAction = isLiked
-      ? removeCardLike(id)
-      : addCardLike(id);
+    const likeAction = isLiked ? removeCardLike(id) : addCardLike(id);
 
     likeAction
       .then((updatedCard) => {
         setItems((prevCards) =>
           prevCards.map((item) =>
-            item._id === id
-              ? { ...item, likes: updatedCard.data.likes } 
-              : item
+            item._id === id ? { ...item, likes: updatedCard.data.likes } : item
           )
         );
       })
-      .catch((err) => console.error('Like error:', err));
+      .catch((err) => console.error("Like error:", err));
   };
-
 
   const handleCardFormChange = (e) => {
     const { name, value } = e.target;
@@ -144,9 +144,11 @@ function App() {
     setIsSubmitEnabled(allValid && allFilled);
   };
   return (
-    <CurrentUserContext.Provider value={currentUser} >
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, setCurrentTemperatureUnit }} >
+        <CurrentTemperatureUnitContext.Provider
+          value={{ currentTemperatureUnit, setCurrentTemperatureUnit }}
+        >
           <Header
             setShowModal={setShowModal}
             city={weather.city}
@@ -163,49 +165,54 @@ function App() {
           />
 
           <Routes>
-            <Route path="/" element={
-              <Main
-                showModal={showModal}
-                setShowModal={setShowModal}
-                temperature={weather.temperature}
-                weatherType={weather.weatherType}
-                weatherInfo={weather.weatherInfo}
-                items={items}
-                setItems={setItems}
-                isSubmitEnabled={isSubmitEnabled}
-                handleCardFormSubmit={handleCardFormSubmit}
-                errors={errors}
-                formData={formData}
-                handleChange={handleCardFormChange}
-                onCardLike={handleCardLike}
-                isLoggedIn={isLoggedIn}
-
-              />
-            } ></Route>
-            <Route path="/profile" element={
-              <ProtectedRoute isLoggedIn={isLoggedIn} >
-                <Profile
+            <Route
+              path="/"
+              element={
+                <Main
+                  showModal={showModal}
                   setShowModal={setShowModal}
+                  temperature={weather.temperature}
+                  weatherType={weather.weatherType}
+                  weatherInfo={weather.weatherInfo}
                   items={items}
                   setItems={setItems}
-                  weatherType={weather.weatherType}
-                  isOpen={showModal}
-                  onAddItem={handleCardFormSubmit}
                   isSubmitEnabled={isSubmitEnabled}
-                  setIsSubmitEnabled={setIsSubmitEnabled}
-                  handleChange={handleCardFormChange}
-                  formData={formData}
+                  handleCardFormSubmit={handleCardFormSubmit}
                   errors={errors}
+                  formData={formData}
+                  handleChange={handleCardFormChange}
+                  onCardLike={handleCardLike}
                   isLoggedIn={isLoggedIn}
-                  showUpdateProfile={showUpdateProfile}
-                  setShowUpdateProfile={setShowUpdateProfile}
-                  setCurrentUser={setCurrentUser}
-                  setIsLoggedIn={setIsLoggedIn}
                 />
-              </ProtectedRoute>
-            } />
+              }
+            ></Route>
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    setShowModal={setShowModal}
+                    items={items}
+                    setItems={setItems}
+                    weatherType={weather.weatherType}
+                    isOpen={showModal}
+                    onAddItem={handleCardFormSubmit}
+                    isSubmitEnabled={isSubmitEnabled}
+                    setIsSubmitEnabled={setIsSubmitEnabled}
+                    handleChange={handleCardFormChange}
+                    formData={formData}
+                    errors={errors}
+                    isLoggedIn={isLoggedIn}
+                    showUpdateProfile={showUpdateProfile}
+                    setShowUpdateProfile={setShowUpdateProfile}
+                    setCurrentUser={setCurrentUser}
+                    setIsLoggedIn={setIsLoggedIn}
+                    handleCardLike={handleCardLike}
+                  />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
-
 
           <Footer />
           <AddItemModal
